@@ -1,10 +1,11 @@
-# My Portfolio - Full-Stack Web Application
+# My Portfolio
 
 A modern, responsive portfolio website built with HTML, CSS, JavaScript on the frontend and Node.js/Express on the backend.
 
 ## Features
 
 ✨ **Fully Responsive Design**
+
 - **Mobile-First Approach** - Optimized for phones, tablets, and desktops
 - **Hamburger Menu** - Collapsible navigation for mobile devices
 - **Touch-Friendly** - Minimum 44px touch targets for buttons and inputs
@@ -12,6 +13,7 @@ A modern, responsive portfolio website built with HTML, CSS, JavaScript on the f
 - **Progressive Enhancement** - Works on all modern browsers
 
 📱 **Responsive Sections**
+
 - **Navigation** - Desktop horizontal menu, mobile hamburger menu
 - **Hero Section** - Centered layout on mobile, optimized typography
 - **About** - Single column on mobile, centered text
@@ -21,6 +23,7 @@ A modern, responsive portfolio website built with HTML, CSS, JavaScript on the f
 - **Footer** - Centered social links with appropriate spacing
 
 ⚙️ **Backend API**
+
 - `/api/projects` - GET endpoint for all projects
 - `/api/contact` - POST endpoint for form submissions
 - Static file serving for frontend assets
@@ -44,6 +47,7 @@ Your contact form now sends real emails! Here's how to set it up:
 ### 1. **Choose an Email Service**
 
 **Option A: Gmail (Recommended)**
+
 1. Go to your Google Account settings
 2. Enable 2-Factor Authentication
 3. Generate an "App Password":
@@ -53,9 +57,11 @@ Your contact form now sends real emails! Here's how to set it up:
    - Copy the 16-character password
 
 **Option B: Outlook/Hotmail**
+
 - Use your regular password (no app password needed)
 
 **Option C: Other Services**
+
 - Configure SMTP settings in `emailService.js`
 
 ### 2. **Configure Environment Variables**
@@ -69,6 +75,7 @@ EMAIL_PASS=your-app-password-or-regular-password
 ```
 
 **Example for Gmail:**
+
 ```env
 EMAIL_USER=myportfolio@gmail.com
 EMAIL_PASS=abcd-efgh-ijkl-mnop
@@ -84,11 +91,13 @@ EMAIL_PASS=abcd-efgh-ijkl-mnop
 ### 4. **Troubleshooting**
 
 **"Authentication failed" error:**
+
 - Double-check your email and password
 - For Gmail, make sure you're using an App Password, not your regular password
 - Wait a few minutes and try again (Gmail sometimes blocks new apps)
 
 **Emails not arriving:**
+
 - Check your spam/junk folder
 - Verify the email address in `.env` is correct
 - Check server logs for error messages
@@ -99,19 +108,19 @@ Create a simple test script to verify your email configuration:
 
 ```javascript
 // test-email.js
-require('dotenv').config();
-const { sendContactEmail } = require('./emailService');
+require("dotenv").config();
+const { sendContactEmail } = require("./emailService");
 
 async function testEmail() {
   try {
     await sendContactEmail({
-      name: 'Test User',
-      email: 'test@example.com',
-      message: 'This is a test message from your portfolio!'
+      name: "Test User",
+      email: "test@example.com",
+      message: "This is a test message from your portfolio!",
     });
-    console.log('✅ Email sent successfully!');
+    console.log("✅ Email sent successfully!");
   } catch (error) {
-    console.error('❌ Email test failed:', error.message);
+    console.error("❌ Email test failed:", error.message);
   }
 }
 
@@ -119,6 +128,7 @@ testEmail();
 ```
 
 Run the test:
+
 ```bash
 node test-email.js
 ```
@@ -136,6 +146,7 @@ To test the responsive design:
    - **480px** - Small mobile optimizations
 
 **Mobile Features:**
+
 - Hamburger menu for navigation
 - Touch-friendly buttons (44px minimum)
 - Stacked layouts for better readability
@@ -146,6 +157,7 @@ To test the responsive design:
 ### Frontend Learning Points
 
 This portfolio teaches you:
+
 - **Semantic HTML** - Proper structure with section elements
 - **CSS Grid & Flexbox** - Modern layout techniques
 - **CSS Variables** - Theme management with custom properties
@@ -158,6 +170,7 @@ This portfolio teaches you:
 #### Update Your Information
 
 1. **Hero Section** - Edit text in `index.html`:
+
    ```html
    <h1 class="hero-title">Your Name Here</h1>
    <p class="hero-subtitle">Your tagline</p>
@@ -168,6 +181,7 @@ This portfolio teaches you:
 3. **Skills** - Modify the skill cards in the Skills section
 
 4. **Projects** - Edit `server.js` projects array:
+
    ```javascript
    const projects = [
      {
@@ -175,7 +189,7 @@ This portfolio teaches you:
        title: "Your Project Title",
        description: "Project description",
        tech: ["HTML", "CSS", "JavaScript"],
-       link: "#projects"
+       link: "#projects",
      },
      // Add more projects...
    ];
@@ -184,9 +198,9 @@ This portfolio teaches you:
 5. **Colors** - Change theme colors in `styles.css`:
    ```css
    :root {
-     --accent: #38bdf8;        /* Primary color */
-     --accent-dark: #0ea5e9;   /* Darker shade */
-     --bg: #0f172a;            /* Background */
+     --accent: #38bdf8; /* Primary color */
+     --accent-dark: #0ea5e9; /* Darker shade */
+     --bg: #0f172a; /* Background */
      /* ... more colors */
    }
    ```
@@ -194,6 +208,7 @@ This portfolio teaches you:
 #### Backend Customization
 
 In `server.js`, you can:
+
 - Add more projects to the projects array
 - Enhance the contact form validation
 - Add database integration (MongoDB, SQL, etc.)
@@ -202,6 +217,7 @@ In `server.js`, you can:
 ## UI/UX Best Practices Implemented
 
 1. **Responsive Design**
+
    - Mobile-first CSS approach
    - Flexible grid systems (CSS Grid & Flexbox)
    - Fluid typography with `clamp()` functions
@@ -209,6 +225,7 @@ In `server.js`, you can:
    - Progressive enhancement strategy
 
 2. **Visual Hierarchy**
+
    - Clear sizing and spacing for important elements
    - Color contrast ratios meet WCAG guidelines
    - Micro-interactions on hover/touch
@@ -216,6 +233,7 @@ In `server.js`, you can:
    - Consistent spacing using CSS custom properties
 
 3. **Accessibility**
+
    - Semantic HTML structure
    - Proper ARIA labels and roles
    - Keyboard navigation support
@@ -223,6 +241,7 @@ In `server.js`, you can:
    - Screen reader friendly content
 
 4. **Performance**
+
    - Optimized CSS with minimal repaints
    - Efficient JavaScript with event delegation
    - Lazy loading considerations
@@ -237,6 +256,7 @@ In `server.js`, you can:
 ## Next Steps for Learning
 
 ### Frontend Enhancements
+
 - [ ] Add smooth animations with CSS keyframes
 - [ ] Implement dark/light mode toggle
 - [ ] Add project detail pages
@@ -244,6 +264,7 @@ In `server.js`, you can:
 - [ ] Add image gallery with lightbox
 
 ### Backend Enhancements
+
 - [ ] Connect to a database (MongoDB)
 - [ ] Implement user authentication
 - [ ] Add email service for contact form
@@ -251,6 +272,7 @@ In `server.js`, you can:
 - [ ] Add comments functionality
 
 ### Advanced Features
+
 - [ ] Deploy to Vercel or Heroku
 - [ ] Add CDN for images
 - [ ] Implement caching strategies
@@ -260,12 +282,15 @@ In `server.js`, you can:
 ## API Endpoints
 
 ### Get All Projects
+
 ```
 GET /api/projects
 ```
+
 Returns: Array of project objects
 
 ### Submit Contact Form
+
 ```
 POST /api/contact
 Content-Type: application/json
@@ -276,37 +301,44 @@ Content-Type: application/json
   "message": "Your message"
 }
 ```
+
 Returns: Success message with confirmation
 
 ## Deployment Options
 
 ### Vercel (Recommended for Node.js)
+
 1. Push code to GitHub
 2. Import project in Vercel
 3. Set up environment variables
 4. Deploy with one click
 
 ### Heroku
+
 1. Create a Heroku account
 2. Install Heroku CLI
 3. Run `heroku create` and `git push heroku main`
 
 ### Local Hosting
+
 - Nginx/Apache for static hosting
 - PM2 for process management
 
 ## Troubleshooting
 
 **Port 3000 already in use:**
+
 ```powershell
 $env:PORT=3001; npm start
 ```
 
 **CORS errors:**
+
 - Check that API requests use correct URLs
 - Add CORS middleware if needed
 
 **Form not submitting:**
+
 - Check browser console for errors
 - Verify all form fields have correct names
 - Ensure server is running
@@ -334,6 +366,7 @@ Feel free to use this as a learning resource and customize it for your needs!
 ## Support
 
 If you have questions:
+
 1. Check the troubleshooting section
 2. Review the code comments
 3. Consult the resources section
