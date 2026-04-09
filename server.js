@@ -8,14 +8,6 @@ const PORT = process.env.PORT || 3000;
 const projects = [
   {
     id: 1,
-    title: "E-commerce Landing Page",
-    description:
-      "Responsive product showcase with modern UI, smooth animations, and checkout demo flows.",
-    tech: ["HTML", "CSS", "JavaScript"],
-    link: "#projects",
-  },
-  {
-    id: 2,
     title: "Task Manager App",
     description:
       "A simple productivity app that manages tasks, categories, and progress tracking.",
@@ -23,7 +15,7 @@ const projects = [
     link: "#projects",
   },
   {
-    id: 3,
+    id: 2,
     title: "Portfolio API",
     description:
       "A fullstack API that powers a portfolio website and handles contact form submissions.",
@@ -31,7 +23,7 @@ const projects = [
     link: "#contact",
   },
   {
-    id: 4,
+    id: 3,
     title: "E-commerce Store Clone",
     description:
       "A polished e-commerce clone demo with responsive product browsing, modern UI styling, and a live Vercel preview.",
