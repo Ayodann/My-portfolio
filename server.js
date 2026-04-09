@@ -30,6 +30,14 @@ const projects = [
     tech: ["HTML", "CSS", "JavaScript"],
     link: "https://exclusive-woad.vercel.app/",
   },
+  {
+    id: 4,
+    title: "Flylo Portfolio Clone",
+    description:
+      "A modern portfolio clone inspired by Flylo, featuring sleek design, smooth animations, and responsive layout hosted on Netlify.",
+    tech: ["HTML", "CSS", "JavaScript"],
+    link: "https://ayodeji-me.netlify.app/",
+  },
 ];
 
 app.use(express.json());
