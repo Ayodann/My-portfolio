@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>My Portfolio - Full-Stack Developer</title>
+  </head>
+  <body>
+    <div class="parallax-lights">
+      <span class="parallax-light light-1" data-speed="0.18"></span>
+      <span class="parallax-light light-2" data-speed="0.3"></span>
+      <span class="parallax-light light-3" data-speed="0.12"></span>
+      <span class="parallax-light light-4" data-speed="0.22"></span>
+      <span class="parallax-light light-5" data-speed="0.15"></span>
+      <span class="parallax-light light-6" data-speed="0.28"></span>
+      <span class="parallax-light light-7" data-speed="0.2"></span>
+      <span class="parallax-light light-8" data-speed="0.1"></span>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="container">
+        <div class="nav-brand">
+          <h2>Portfolio</h2>
+        </div>
+        <div class="nav-menu">
+          <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+          <div class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-text">
+            <h1 class="hero-title">Hi, I'm Ayodeji Daniel</h1>
+            <p class="hero-subtitle">
+              Building beautiful and functional web experiences
+            </p>
+            <p class="lead">
+              I'm a full-stack developer with a passion for creating intuitive
+              user experiences and robust backend systems.
+            </p>
+            <div class="cta-buttons">
+              <a href="#projects" class="btn-primary">View My Work</a>
+              <a href="#contact" class="btn-secondary">Get in Touch</a>
+            </div>
+          </div>
+          <div class="hero-image">
+            <img src="prof.png" alt="Profile Picture" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+      <div class="container">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-img">
+          <img src="" alt="" />
+        </div>
+        <div class="about-content">
+          <p>
+            I'm a passionate developer learning the ins and outs of full-stack
+            web development. My journey started with curiosity about how
+            websites work, and now I'm committed to building projects that
+            matter.
+          </p>
+          <p>
+            I believe in writing clean code, user-centered design, and
+            continuous learning. Currently, I'm focusing on mastering modern web
+            technologies and best practices.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+      <div class="container">
+        <h2 class="section-title">Skills</h2>
+        <div class="skills-grid">
+          <div class="skill-card">
+            <h3>Frontend</h3>
+            <ul class="skill-list">
+              <li>HTML5</li>
+              <li>CSS3</li>
+              <li>JavaScript</li>
+              <li>Responsive Design</li>
+            </ul>
+          </div>
+          <div class="skill-card">
+            <h3>Backend</h3>
+            <ul class="skill-list">
+              <li>Node.js</li>
+              <li>Express</li>
+              <li>REST APIs</li>
+              <li>Server Architecture</li>
+            </ul>
+          </div>
+          <div class="skill-card">
+            <h3>Tools & Practices</h3>
+            <ul class="skill-list">
+              <li>Git & GitHub</li>
+              <li>VS Code</li>
+              <li>Problem Solving</li>
+              <li>Debugging</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+      <div class="container">
+        <h2 class="section-title">Featured Projects</h2>
+        <div id="projects-grid" class="projects-grid">
+          <!-- Projects loaded dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+      <div class="container">
+        <h2 class="section-title">Let's Connect</h2>
+        <div class="contact-content">
+          <p>
+            Have a project in mind? I'd love to hear from you. Get in touch and
+            let's create something amazing together.
+          </p>
+          <form id="contact-form" class="contact-form">
+            <div class="form-group">
+              <label for="name">Your Name</label>
+              <input type="text" id="name" name="name" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Your Email</label>
+              <input type="email" id="email" name="email" required />
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="5"
+                required
+              ></textarea>
+            </div>
+            <button type="submit" class="btn-primary btn-block">
+              Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <p>&copy; 2026 My Portfolio. All rights reserved.</p>
+        <div class="social-links">
+          <a href="#" class="social-link">GitHub</a>
+          <a href="#" class="social-link">LinkedIn</a>
+          <a href="#" class="social-link">Twitter</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
