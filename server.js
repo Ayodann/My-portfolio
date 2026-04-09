@@ -30,6 +30,14 @@ const projects = [
     tech: ["Node.js", "Express"],
     link: "#contact",
   },
+  {
+    id: 4,
+    title: "E-commerce Store Clone",
+    description:
+      "A polished e-commerce clone demo with responsive product browsing, modern UI styling, and a live Vercel preview.",
+    tech: ["HTML", "CSS", "JavaScript"],
+    link: "https://exclusive-woad.vercel.app/",
+  },
 ];
 
 app.use(express.json());
@@ -63,7 +71,7 @@ app.post("/api/contact", async (req, res) => {
     const sanitizedData = {
       name: name.trim(),
       email: email.trim().toLowerCase(),
-      message: message.trim()
+      message: message.trim(),
     };
 
     // Send email
@@ -74,9 +82,10 @@ app.post("/api/contact", async (req, res) => {
       message: `Thanks ${sanitizedData.name}! Your message has been sent successfully. I'll get back to you soon.`,
     });
   } catch (error) {
-    console.error('Contact form error:', error);
+    console.error("Contact form error:", error);
     return res.status(500).json({
-      error: "Sorry, there was an error sending your message. Please try again later or contact me directly."
+      error:
+        "Sorry, there was an error sending your message. Please try again later or contact me directly.",
     });
   }
 });

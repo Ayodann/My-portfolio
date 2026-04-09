@@ -59,18 +59,22 @@ async function loadProjects() {
     const projects = await response.json();
 
     projectContainer.innerHTML = projects
-      .map(
-        (project) => `
+      .map((project) => {
+        const externalAttrs = project.link.startsWith("http")
+          ? 'target="_blank" rel="noreferrer noopener"'
+          : "";
+
+        return `
           <article class="card">
             <h3>${project.title}</h3>
             <p>${project.description}</p>
             <div class="badges">
               ${project.tech.map((item) => `<span class="badge">${item}</span>`).join("")}
             </div>
-            <a class="btn-secondary" href="${project.link}">View details</a>
+            <a class="btn-secondary" href="${project.link}" ${externalAttrs}>View details</a>
           </article>
-        `,
-      )
+        `;
+      })
       .join("");
   } catch (error) {
     projectContainer.innerHTML =
