@@ -3,6 +3,7 @@ const express = require("express");
 const path = require("path");
 const { sendContactEmail } = require("./emailService");
 const rateLimit = require("express-rate-limit");
+const helmet = require("helmet");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -41,6 +42,7 @@ const projects = [
   },
 ];
 
+app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname)));
