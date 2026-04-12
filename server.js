@@ -4,51 +4,36 @@ const path = require("path");
 const { sendContactEmail } = require("./emailService");
 const rateLimit = require("express-rate-limit");
 const helmet = require("helmet");
+const mongoose = require("mongoose");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const projects = [
-  {
-    id: 1,
-    title: "Task Manager App",
-    description:
-      "A simple productivity app that manages tasks, categories, and progress tracking.",
-    tech: ["React", "Node.js", "Express"],
-    link: "#projects",
-  },
-  {
-    id: 2,
-    title: "Portfolio API",
-    description:
-      "A fullstack API that powers a portfolio website and handles contact form submissions.",
-    tech: ["Node.js", "Express"],
-    link: "#contact",
-  },
-  {
-    id: 3,
-    title: "E-commerce Store Clone",
-    description:
-      "A polished e-commerce clone demo with responsive product browsing, modern UI styling, and a live Vercel preview.",
-    tech: ["HTML", "CSS", "JavaScript"],
-    link: "https://exclusive-woad.vercel.app/",
-  },
-  {
-    id: 4,
-    title: "Flylo Portfolio Clone",
-    description:
-      "A modern portfolio clone inspired by Flylo, featuring sleek design, smooth animations, and responsive layout hosted on Netlify.",
-    tech: ["HTML", "CSS", "JavaScript"],
-    link: "https://ayodeji-me.netlify.app/",
-  },
-];
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log("Connected to MongoDB!"))
+  .catch((err) => console.error("Database connection error:", err));
+
+const projectSchema = new mongoose.Schema({
+  title: String,
+  description: String,
+  tech: [String],
+  link: String,
+});
+
+const Project = mongoose.model("Project", projectSchema);
 
 app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname)));
 
-app.get("/api/projects", (req, res) => {
-  res.json(projects);
+app.get("/api/projects", async (req, res) => {
+  try {
+    const projects = await Project.find();
+    res.json(projects);
+  } catch (error) {
+    console.error("Failed to fetch projects:", error);
+    res.status(500).json({ error: "Failed to fetch projects" });
+  }
 });
 
 // Rate limiting for the contact form to prevent spam
