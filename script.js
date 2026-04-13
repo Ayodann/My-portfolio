@@ -53,6 +53,19 @@ document.addEventListener("click", (e) => {
   }
 });
 
+function escapeHTML(str) {
+  if (!str) return "";
+  return String(str).replace(/[&<>'"]/g, 
+    tag => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        "'": '&#39;',
+        '"': '&quot;'
+      }[tag] || tag)
+  );
+}
+
 async function loadProjects() {
   try {
     const response = await fetch("/api/projects");
@@ -66,19 +79,19 @@ async function loadProjects() {
 
         return `
           <article class="card">
-            <h3>${project.title}</h3>
-            <p>${project.description}</p>
+            <h3>${escapeHTML(project.title)}</h3>
+            <p>${escapeHTML(project.description)}</p>
             <div class="badges">
-              ${project.tech.map((item) => `<span class="badge">${item}</span>`).join("")}
+              ${project.tech.map((item) => `<span class="badge">${escapeHTML(item)}</span>`).join("")}
             </div>
-            <a class="btn-secondary" href="${project.link}" ${externalAttrs}>View details</a>
+            <a class="btn-secondary" href="${escapeHTML(project.link)}" ${externalAttrs}>View details</a>
           </article>
         `;
       })
       .join("");
   } catch (error) {
     projectContainer.innerHTML =
-      '<p class="lead">Unable to load projects right now. Please try again later.</p>';
+      '<div style="grid-column: 1 / -1; text-align: center; padding: 2rem;"><p class="lead">Unable to load projects right now.</p><button onclick="loadProjects()" class="btn-secondary" style="margin-top: 1rem;">Try Again</button></div>';
   }
 }
 
@@ -144,8 +157,28 @@ function updateParallaxLights() {
   });
 }
 
-window.addEventListener("scroll", updateParallaxLights);
-window.addEventListener("resize", updateParallaxLights);
+let ticking = false;
+
+window.addEventListener("scroll", () => {
+  if (!ticking) {
+    window.requestAnimationFrame(() => {
+      updateParallaxLights();
+      ticking = false;
+    });
+    ticking = true;
+  }
+});
+
+window.addEventListener("resize", () => {
+  if (!ticking) {
+    window.requestAnimationFrame(() => {
+      updateParallaxLights();
+      ticking = false;
+    });
+    ticking = true;
+  }
+});
+
 updateParallaxLights();
 
 loadProjects();
