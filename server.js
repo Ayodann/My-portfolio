@@ -91,6 +91,11 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
-app.listen(PORT, () => {
-  console.log(`Portfolio server running on http://localhost:${PORT}`);
-});
+if (process.env.NODE_ENV !== "production") {
+  app.listen(PORT, () => {
+    console.log(`Portfolio server running on http://localhost:${PORT}`);
+  });
+}
+
+// Export the Express API for Vercel
+module.exports = app;
