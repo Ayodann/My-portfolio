@@ -2,50 +2,46 @@ require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const { sendContactEmail } = require("./emailService");
-const rateLimit = require("express-rate-limit");
-const helmet = require("helmet");
-const mongoose = require("mongoose");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log("Connected to MongoDB!"))
-  .catch((err) => console.error("Database connection error:", err));
+// Sample projects data (you can replace these with your actual projects)
+const projects = [
+  {
+    id: 1,
+    title: "E-commerce Landing Page",
+    description:
+      "Responsive product showcase with modern UI, smooth animations, and checkout demo flows.",
+    tech: ["HTML", "CSS", "JavaScript"],
+    link: "#projects",
+  },
+  {
+    id: 2,
+    title: "Task Manager App",
+    description:
+      "A simple productivity app that manages tasks, categories, and progress tracking.",
+    tech: ["React", "Node.js", "Express"],
+    link: "#projects",
+  },
+  {
+    id: 3,
+    title: "Portfolio API",
+    description:
+      "A fullstack API that powers a portfolio website and handles contact form submissions.",
+    tech: ["Node.js", "Express"],
+    link: "#contact",
+  },
+];
 
-const projectSchema = new mongoose.Schema({
-  title: String,
-  description: String,
-  tech: [String],
-  link: String,
-});
-
-const Project = mongoose.model("Project", projectSchema);
-
-app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname)));
 
-app.get("/api/projects", async (req, res) => {
-  try {
-    const projects = await Project.find();
-    res.json(projects);
-  } catch (error) {
-    console.error("Failed to fetch projects:", error);
-    res.status(500).json({ error: "Failed to fetch projects" });
-  }
+app.get("/api/projects", (req, res) => {
+  res.json(projects);
 });
 
-// Rate limiting for the contact form to prevent spam
-const contactLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 5, // Limit each IP to 5 requests per windowMs
-  message: { error: "Too many messages sent from this IP, please try again after 15 minutes." },
-  standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
-  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
-});
-
-app.post("/api/contact", contactLimiter, async (req, res) => {
+app.post("/api/contact", async (req, res) => {
   try {
     const { name, email, message } = req.body;
 
