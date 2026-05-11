@@ -3,6 +3,33 @@ const contactForm = document.getElementById("contact-form");
 const toast = document.getElementById("toast");
 const hamburger = document.querySelector(".hamburger");
 const navLinks = document.querySelector(".nav-links");
+const themeToggle = document.getElementById("theme-toggle");
+
+// Theme Management
+function initTheme() {
+  const savedTheme = localStorage.getItem("theme") || "dark";
+  document.documentElement.setAttribute("data-theme", savedTheme);
+  updateThemeIcon(savedTheme);
+}
+
+function toggleTheme() {
+  const currentTheme = document.documentElement.getAttribute("data-theme");
+  const newTheme = currentTheme === "dark" ? "light" : "dark";
+
+  document.documentElement.setAttribute("data-theme", newTheme);
+  localStorage.setItem("theme", newTheme);
+  updateThemeIcon(newTheme);
+}
+
+function updateThemeIcon(theme) {
+  // The CSS handles showing/hiding the icons based on data-theme attribute
+}
+
+// Initialize theme on page load
+initTheme();
+
+// Theme toggle event listener
+themeToggle.addEventListener("click", toggleTheme);
 
 // Mobile Navigation Toggle
 hamburger.addEventListener("click", () => {
@@ -55,44 +82,64 @@ document.addEventListener("click", (e) => {
 
 function escapeHTML(str) {
   if (!str) return "";
-  return String(str).replace(/[&<>'"]/g, 
-    tag => ({
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        "'": '&#39;',
-        '"': '&quot;'
-      }[tag] || tag)
+  return String(str).replace(
+    /[&<>'"]/g,
+    (tag) =>
+      ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "'": "&#39;",
+        '"': "&quot;",
+      })[tag] || tag,
   );
 }
 
-async function loadProjects() {
-  try {
-    const response = await fetch("/api/projects");
-    const projects = await response.json();
+function loadProjects() {
+  const projects = [
+    {
+      title: "E-commerce Store Clone",
+      description:
+        "A polished e-commerce clone demo with responsive product browsing, modern UI styling, and a live Vercel preview.",
+      tech: ["HTML", "CSS", "JavaScript"],
+      link: "https://exclusive-woad.vercel.app/",
+    },
+    {
+      title: "Portfolio API",
+      description:
+        "A fullstack API that powers a portfolio website and handles contact form submissions.",
+      tech: ["Node.js", "Express"],
+      link: "#contact",
+    },
+    {
+      title: "Flylo Portfolio Clone",
+      description:
+        "A modern portfolio clone inspired by Flylo, featuring sleek design, smooth animations, and responsive layout hosted on Netlify.",
+      tech: ["HTML", "CSS", "JavaScript"],
+      link: "https://ayodeji-me.netlify.app/",
+    },
+  ];
 
-    projectContainer.innerHTML = projects
-      .map((project) => {
-        const externalAttrs = project.link.startsWith("http")
-          ? 'target="_blank" rel="noreferrer noopener"'
-          : "";
+  projectContainer.innerHTML = projects
+    .map((project) => {
+      const externalAttrs = project.link.startsWith("http")
+        ? 'target="_blank" rel="noreferrer noopener"'
+        : "";
 
-        return `
+      return `
           <article class="card">
             <h3>${escapeHTML(project.title)}</h3>
             <p>${escapeHTML(project.description)}</p>
             <div class="badges">
-              ${project.tech.map((item) => `<span class="badge">${escapeHTML(item)}</span>`).join("")}
+              ${project.tech
+                .map((item) => `<span class="badge">${escapeHTML(item)}</span>`)
+                .join("")}
             </div>
             <a class="btn-secondary" href="${escapeHTML(project.link)}" ${externalAttrs}>View details</a>
           </article>
         `;
-      })
-      .join("");
-  } catch (error) {
-    projectContainer.innerHTML =
-      '<div style="grid-column: 1 / -1; text-align: center; padding: 2rem;"><p class="lead">Unable to load projects right now.</p><button onclick="loadProjects()" class="btn-secondary" style="margin-top: 1rem;">Try Again</button></div>';
-  }
+    })
+    .join("");
 }
 
 function showToast(message) {
@@ -145,6 +192,9 @@ contactForm.addEventListener("submit", async (event) => {
   }
 });
 
+/* Parallax movement for the floating lights in the background.
+   Each light has a different speed based on its data-speed value,
+   creating a layered motion effect as the page scrolls. */
 function updateParallaxLights() {
   const scrollY = window.scrollY;
   document.querySelectorAll(".parallax-light").forEach((light) => {

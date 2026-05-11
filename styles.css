@@ -1,4 +1,5 @@
 :root {
+  /* Dark Theme (Default) */
   --bg: #0f172a;
   --surface: #111827;
   --surface-soft: #1f2937;
@@ -7,6 +8,24 @@
   --accent: #38bdf8;
   --accent-dark: #0ea5e9;
   --shadow: 0 24px 80px rgba(15, 23, 42, 0.35);
+  --border: rgba(148, 163, 184, 0.12);
+  --input-bg: rgba(148, 163, 184, 0.08);
+  --card-bg: rgba(15, 23, 42, 0.92);
+}
+
+/* Light Theme */
+[data-theme="light"] {
+  --bg: #ffffff;
+  --surface: #f8fafc;
+  --surface-soft: #e2e8f0;
+  --text: #0f172a;
+  --muted: #64748b;
+  --accent: #3b82f6;
+  --accent-dark: #2563eb;
+  --shadow: 0 24px 80px rgba(0, 0, 0, 0.1);
+  --border: rgba(148, 163, 184, 0.2);
+  --input-bg: rgba(148, 163, 184, 0.1);
+  --card-bg: rgba(255, 255, 255, 0.95);
 }
 
 * {
@@ -22,12 +41,13 @@ html {
 body {
   position: relative;
   font-family: "Inter", system-ui, sans-serif;
-  background:
-    radial-gradient(circle at top, rgba(56, 189, 248, 0.12), transparent 28%),
-    linear-gradient(180deg, #020617 0%, #0f172a 100%);
+  background: var(--bg);
   color: var(--text);
   min-height: 100vh;
   overflow-x: hidden;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 .parallax-lights {
@@ -36,6 +56,12 @@ body {
   z-index: -1;
   pointer-events: none;
   overflow: hidden;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+[data-theme="light"] .parallax-lights {
+  opacity: 0;
 }
 
 .parallax-light {
@@ -180,8 +206,8 @@ body::before {
   top: 0;
   z-index: 10;
   backdrop-filter: blur(16px);
-  background: rgba(15, 23, 42, 0.84);
-  border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
 }
 
 .navbar .container {
@@ -257,6 +283,50 @@ body::before {
   border-radius: 2px;
 }
 
+/* Theme Toggle */
+.theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  color: var(--text);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-toggle-mobile {
+  display: none;
+}
+
+.theme-toggle:hover {
+  background: var(--surface-soft);
+}
+
+.theme-toggle svg {
+  width: 20px;
+  height: 20px;
+  transition: all 0.3s ease;
+}
+
+.sun-icon {
+  display: block;
+}
+
+.moon-icon {
+  display: none;
+}
+
+[data-theme="light"] .sun-icon {
+  display: none;
+}
+
+[data-theme="light"] .moon-icon {
+  display: block;
+}
+
 .hero {
   padding: 5rem 0 2rem;
   display: grid;
@@ -276,17 +346,18 @@ body::before {
   flex: 1;
   max-width: 600px;
 }
-
-.hero-image {
+/* Hero image container and floating glow effect */
+/* .hero-image {
   flex: 0 1 40%;
   width: 100%;
   min-width: 0;
   display: flex;
   justify-content: center;
   position: relative;
-}
+} */
 
-.hero-image::before {
+/* Soft glowing box behind the image to create depth and visual focus */
+/* .hero-image::before {
   content: "";
   position: absolute;
   inset: 15%;
@@ -296,34 +367,49 @@ body::before {
   z-index: -1;
   border-radius: 50%;
   animation: pulseGlow 4s ease-in-out infinite alternate;
-}
+} */
 
+/* Main image styling plus floating movement animation */
 .hero-image img {
   width: 100%;
   max-width: 360px;
   height: auto;
   border-radius: 24px;
   object-fit: cover;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  animation: liveFloat 6s ease-in-out infinite;
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, border-color 0.4s;
+  /* box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08); */
+  /* animation: liveFloat 6s ease-in-out infinite;
+  transition:
+    transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    box-shadow 0.4s ease,
+    border-color 0.4s; */
 }
 
-.hero-image img:hover {
+/* .hero-image img:hover {
   transform: scale(1.04);
   box-shadow: 0 30px 60px rgba(56, 189, 248, 0.25);
   border-color: rgba(56, 189, 248, 0.3);
-}
+} */
 
 @keyframes liveFloat {
-  0%, 100% { translate: 0 0; }
-  50% { translate: 0 -16px; }
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -16px;
+  }
 }
 
 @keyframes pulseGlow {
-  0% { opacity: 0.15; transform: scale(0.9); }
-  100% { opacity: 0.35; transform: scale(1.1); }
+  0% {
+    opacity: 0.15;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 0.35;
+    transform: scale(1.1);
+  }
 }
 
 @keyframes titleEntrance {
@@ -353,7 +439,12 @@ body::before {
   font-size: clamp(2.8rem, 5vw, 4.2rem);
   line-height: 0.96;
   margin-bottom: 1rem;
-  background: linear-gradient(135deg, var(--text) 0%, var(--accent) 50%, var(--text) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--text) 0%,
+    var(--accent) 50%,
+    var(--text) 100%
+  );
   background-size: 200% auto;
   color: transparent;
   -webkit-background-clip: text;
@@ -486,8 +577,8 @@ body::before {
 }
 
 .skill-card {
-  background: rgba(15, 23, 42, 0.92);
-  border: 1px solid rgba(148, 163, 184, 0.12);
+  background: var(--card-bg);
+  border: 1px solid var(--border);
   border-radius: 22px;
   padding: 2rem;
   transition:
@@ -538,8 +629,8 @@ body::before {
 }
 
 .card {
-  background: rgba(15, 23, 42, 0.92);
-  border: 1px solid rgba(148, 163, 184, 0.12);
+  background: var(--card-bg);
+  border: 1px solid var(--border);
   border-radius: 22px;
   padding: 2rem;
   box-shadow: var(--shadow);
@@ -621,8 +712,8 @@ body::before {
 .form-group input,
 .form-group textarea {
   width: 100%;
-  background: rgba(148, 163, 184, 0.08);
-  border: 1px solid rgba(148, 163, 184, 0.14);
+  background: var(--input-bg);
+  border: 1px solid var(--border);
   border-radius: 12px;
   padding: 0.9rem 1rem;
   color: var(--text);
@@ -763,7 +854,7 @@ body::before {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .hamburger {
     display: flex;
   }
@@ -779,7 +870,9 @@ body::before {
     backdrop-filter: blur(20px);
     border-top: 1px solid rgba(148, 163, 184, 0.12);
     overflow: hidden;
-    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition:
+      max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      padding 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.5);
     gap: 0;
   }
@@ -829,7 +922,6 @@ body::before {
     width: 100%;
     max-width: 180px;
     height: auto;
-  
   }
 
   .hero-title {

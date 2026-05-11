@@ -32,6 +32,43 @@
             <li><a href="#projects">Projects</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
+          <button
+            id="theme-toggle"
+            class="theme-toggle"
+            aria-label="Toggle theme"
+          >
+            <svg
+              class="sun-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle
+                cx="12"
+                cy="12"
+                r="5"
+                stroke="currentColor"
+                stroke-width="2"
+              />
+              <path
+                d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"
+                stroke="currentColor"
+                stroke-width="2"
+              />
+            </svg>
+            <svg
+              class="moon-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
+                stroke="currentColor"
+                stroke-width="2"
+              />
+            </svg>
+          </button>
           <button class="hamburger" aria-label="Toggle navigation menu">
             <span class="bar"></span>
             <span class="bar"></span>
@@ -51,8 +88,8 @@
               Building beautiful and functional web experiences
             </p>
             <p class="lead">
-              I'm a full-stack developer with a passion for creating intuitive
-              user experiences and robust backend systems.
+              I'm a frontend developer with a passion for creating intuitive
+              user experiences and polished web interfaces.
             </p>
             <div class="cta-buttons">
               <a href="#projects" class="btn-primary">View My Work</a>
@@ -60,7 +97,7 @@
             </div>
           </div>
           <div class="hero-image">
-            <img src="prof.png" alt="Profile Picture" loading="lazy"/>
+            <img src="prof.png" alt="Profile Picture" loading="lazy" />
           </div>
         </div>
       </div>
@@ -75,10 +112,10 @@
         </div> -->
         <div class="about-content">
           <p>
-            I'm a passionate developer learning the ins and outs of full-stack
-            web development. My journey started with curiosity about how
-            websites work, and now I'm committed to building projects that
-            matter.
+            I'm a passionate developer learning the ins and outs of frontend web
+            development. My journey started with curiosity about how websites
+            look and feel, and now I'm committed to building projects that look
+            great and work smoothly.
           </p>
           <p>
             I believe in writing clean code, user-centered design, and
@@ -104,12 +141,12 @@
             </ul>
           </div>
           <div class="skill-card">
-            <h3>Backend</h3>
+            <h3>Web Design</h3>
             <ul class="skill-list">
-              <li>Node.js</li>
-              <li>Express</li>
-              <li>REST APIs</li>
-              <li>Server Architecture</li>
+              <li>UI/UX Design</li>
+              <li>Accessibility</li>
+              <li>Animation</li>
+              <li>Responsive Layouts</li>
             </ul>
           </div>
           <div class="skill-card">
@@ -147,11 +184,23 @@
           <form id="contact-form" class="contact-form">
             <div class="form-group">
               <label for="name">Your Name</label>
-              <input type="text" id="name" name="name" autocomplete="name" required />
+              <input
+                type="text"
+                id="name"
+                name="name"
+                autocomplete="name"
+                required
+              />
             </div>
             <div class="form-group">
               <label for="email">Your Email</label>
-              <input type="email" id="email" name="email" autocomplete="email" required />
+              <input
+                type="email"
+                id="email"
+                name="email"
+                autocomplete="email"
+                required
+              />
             </div>
             <div class="form-group">
               <label for="message">Message</label>
@@ -175,9 +224,27 @@
       <div class="container">
         <p>&copy; 2026 My Portfolio. All rights reserved.</p>
         <div class="social-links">
-          <a href="https://github.com/Ayodann" target="_blank" rel="noopener noreferrer" class="social-link">GitHub</a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-link">LinkedIn</a>
-          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-link">Twitter</a>
+          <a
+            href="https://github.com/Ayodann"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-link"
+            >GitHub</a
+          >
+          <a
+            href="https://linkedin.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-link"
+            >LinkedIn</a
+          >
+          <a
+            href="https://twitter.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-link"
+            >Twitter</a
+          >
         </div>
       </div>
     </footer>
