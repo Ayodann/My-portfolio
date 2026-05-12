@@ -1,9 +1,9 @@
-const projectContainer = document.getElementById("projects-grid");
-const contactForm = document.getElementById("contact-form");
-const toast = document.getElementById("toast");
-const hamburger = document.querySelector(".hamburger");
-const navLinks = document.querySelector(".nav-links");
-const themeToggle = document.getElementById("theme-toggle");
+let projectContainer = null;
+let contactForm = null;
+let toast = null;
+let hamburger = null;
+let navLinks = null;
+let themeToggle = null;
 
 // Theme Management
 function initTheme() {
@@ -25,59 +25,70 @@ function updateThemeIcon(theme) {
   // The CSS handles showing/hiding the icons based on data-theme attribute
 }
 
-// Initialize theme on page load
-initTheme();
+document.addEventListener("DOMContentLoaded", () => {
+  projectContainer = document.getElementById("projects-grid");
+  contactForm = document.getElementById("contact-form");
+  toast = document.getElementById("toast");
+  hamburger = document.querySelector(".hamburger");
+  navLinks = document.querySelector(".nav-links");
+  themeToggle = document.getElementById("theme-toggle");
 
-// Theme toggle event listener
-themeToggle.addEventListener("click", toggleTheme);
+  // Initialize theme on page load
+  initTheme();
 
-// Mobile Navigation Toggle
-hamburger.addEventListener("click", () => {
-  navLinks.classList.toggle("active");
-  hamburger.classList.toggle("active");
+  // Theme toggle event listener
+  themeToggle.addEventListener("click", toggleTheme);
 
-  // Animate hamburger bars
-  const bars = hamburger.querySelectorAll(".bar");
-  bars.forEach((bar, index) => {
-    if (hamburger.classList.contains("active")) {
-      if (index === 0)
-        bar.style.transform = "rotate(45deg) translate(5px, 5px)";
-      if (index === 1) bar.style.opacity = "0";
-      if (index === 2)
-        bar.style.transform = "rotate(-45deg) translate(7px, -6px)";
-    } else {
-      bar.style.transform = "none";
-      bar.style.opacity = "1";
+  // Mobile Navigation Toggle
+  hamburger.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
+    hamburger.classList.toggle("active");
+
+    // Animate hamburger bars
+    const bars = hamburger.querySelectorAll(".bar");
+    bars.forEach((bar, index) => {
+      if (hamburger.classList.contains("active")) {
+        if (index === 0)
+          bar.style.transform = "rotate(45deg) translate(5px, 5px)";
+        if (index === 1) bar.style.opacity = "0";
+        if (index === 2)
+          bar.style.transform = "rotate(-45deg) translate(7px, -6px)";
+      } else {
+        bar.style.transform = "none";
+        bar.style.opacity = "1";
+      }
+    });
+  });
+
+  // Close mobile menu when clicking on a link
+  navLinks.addEventListener("click", (e) => {
+    if (e.target.tagName === "A") {
+      navLinks.classList.remove("active");
+      hamburger.classList.remove("active");
+
+      const bars = hamburger.querySelectorAll(".bar");
+      bars.forEach((bar) => {
+        bar.style.transform = "none";
+        bar.style.opacity = "1";
+      });
     }
   });
-});
 
-// Close mobile menu when clicking on a link
-navLinks.addEventListener("click", (e) => {
-  if (e.target.tagName === "A") {
-    navLinks.classList.remove("active");
-    hamburger.classList.remove("active");
+  // Close mobile menu when clicking outside
+  document.addEventListener("click", (e) => {
+    if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
+      navLinks.classList.remove("active");
+      hamburger.classList.remove("active");
 
-    const bars = hamburger.querySelectorAll(".bar");
-    bars.forEach((bar) => {
-      bar.style.transform = "none";
-      bar.style.opacity = "1";
-    });
-  }
-});
+      const bars = hamburger.querySelectorAll(".bar");
+      bars.forEach((bar) => {
+        bar.style.transform = "none";
+        bar.style.opacity = "1";
+      });
+    }
+  });
 
-// Close mobile menu when clicking outside
-document.addEventListener("click", (e) => {
-  if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
-    navLinks.classList.remove("active");
-    hamburger.classList.remove("active");
-
-    const bars = hamburger.querySelectorAll(".bar");
-    bars.forEach((bar) => {
-      bar.style.transform = "none";
-      bar.style.opacity = "1";
-    });
-  }
+  loadProjects();
 });
 
 function escapeHTML(str) {
@@ -148,50 +159,6 @@ function showToast(message) {
   setTimeout(() => toast.classList.remove("show"), 3200);
 }
 
-contactForm.addEventListener("submit", async (event) => {
-  event.preventDefault();
-  const formData = new FormData(contactForm);
-  const payload = {
-    name: formData.get("name"),
-    email: formData.get("email"),
-    message: formData.get("message"),
-  };
-
-  // Show loading state
-  const submitButton = contactForm.querySelector('button[type="submit"]');
-  const originalText = submitButton.textContent;
-  submitButton.textContent = "Sending...";
-  submitButton.disabled = true;
-
-  try {
-    const response = await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.error || "Failed to send message");
-    }
-
-    // Success
-    contactForm.reset();
-    showToast("✅ " + data.message);
-  } catch (error) {
-    // Error
-    console.error("Contact form error:", error);
-    showToast(
-      "❌ " + (error.message || "Failed to send message. Please try again."),
-    );
-  } finally {
-    // Reset button state
-    submitButton.textContent = originalText;
-    submitButton.disabled = false;
-  }
-});
-
 /* Parallax movement for the floating lights in the background.
    Each light has a different speed based on its data-speed value,
    creating a layered motion effect as the page scrolls. */
@@ -230,5 +197,3 @@ window.addEventListener("resize", () => {
 });
 
 updateParallaxLights();
-
-loadProjects();

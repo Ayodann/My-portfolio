@@ -181,7 +181,30 @@
             Have a project in mind? I'd love to hear from you. Get in touch and
             let's create something amazing together.
           </p>
-          <form id="contact-form" class="contact-form">
+          <form
+            id="contact-form"
+            class="contact-form"
+            name="contact"
+            method="POST"
+            data-netlify="true"
+            netlify
+            netlify-honeypot="bot-field"
+          >
+            <input type="hidden" name="form-name" value="contact" />
+            <p
+              style="
+                position: absolute;
+                left: -9999px;
+                top: auto;
+                width: 1px;
+                height: 1px;
+                overflow: hidden;
+              "
+            >
+              <label
+                >Don't fill this out if you're human: <input name="bot-field"
+              /></label>
+            </p>
             <div class="form-group">
               <label for="name">Your Name</label>
               <input
