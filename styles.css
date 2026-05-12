@@ -911,6 +911,7 @@ body::before {
   .hero-content {
     flex-direction: column;
     gap: 1.5rem;
+    display: grid;
     justify-content: center;
   }
 
