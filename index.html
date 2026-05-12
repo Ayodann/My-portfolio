@@ -191,7 +191,16 @@
             netlify-honeypot="bot-field"
           >
             <input type="hidden" name="form-name" value="contact" />
-            <p class="hidden-honeypot">
+            <p
+              style="
+                position: absolute;
+                left: -9999px;
+                top: auto;
+                width: 1px;
+                height: 1px;
+                overflow: hidden;
+              "
+            >
               <label
                 >Don't fill this out if you're human: <input name="bot-field"
               /></label>
